@@ -2,7 +2,6 @@ package com.rafa.algamoney.api.exceptionhandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ public class AlgamoneyExceptionHandler extends ResponseEntityExceptionHandler {
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		
 		String msgUsuario = messageSource.getMessage("mensagem.invalida", null,LocaleContextHolder.getLocale());
-		String msgDeveloper = ex.getCause().toString();
+		String msgDeveloper = ex.getCause() != null ? ex.getCause().toString() : ex.toString();
 		List<Erro> erros = Arrays.asList(new Erro(msgUsuario, msgDeveloper));
 		return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
 	}

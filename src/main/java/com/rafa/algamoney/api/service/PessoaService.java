@@ -34,4 +34,18 @@ public class PessoaService {
 		}
 		return pessoaSalva;
 	}
+	
+	public boolean isPessoaAtiva(Long idPessoa) {
+		boolean isPessoaAtiva = false;
+		Pessoa pessoa = buscarPessoaPeloCodigo(idPessoa);
+		if (pessoa != null && pessoa.isAtivo()) {
+			isPessoaAtiva = true;
+		}
+		
+		return isPessoaAtiva;
+	}
+	
+	public boolean isPessoaInativa(Long idPessoa) {
+		return !isPessoaAtiva(idPessoa);
+	}
 }

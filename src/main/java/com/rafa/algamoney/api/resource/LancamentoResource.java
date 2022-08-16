@@ -25,6 +25,7 @@ import com.rafa.algamoney.api.exception.PessoaInativaException;
 import com.rafa.algamoney.api.exceptionhandler.AlgamoneyExceptionHandler.Erro;
 import com.rafa.algamoney.api.model.Lancamento;
 import com.rafa.algamoney.api.repository.LancamentoRepository;
+import com.rafa.algamoney.api.repository.filter.LancamentoFilter;
 import com.rafa.algamoney.api.service.LancamentoService;
 
 @RestController
@@ -44,13 +45,13 @@ public class LancamentoResource {
 	private ApplicationEventPublisher publisher;
 
 	@GetMapping
-	public List<Lancamento> listar() {
-		return lancamentoRepository.findAll();
+	public List<Lancamento> pesquisar(LancamentoFilter filter) {
+		return lancamentoRepository.filtrar(filter);
 	}
 	
 	@GetMapping("/{codigo}")
 	public Lancamento buscarPeloCodigo(@PathVariable Long codigo) {
-		return lancamentoRepository.findOne(codigo);
+		return lancamentoRepository.findOne(codigo); 
 	}
 	
 	@PostMapping
